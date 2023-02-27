@@ -6,14 +6,14 @@
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
 	<sub-flow name="travelOnTip-getRoutes-implementationSub_Flow" doc:id="edabcbbb-7684-477b-a4ee-b5a64d334243" >
-		<http:request method="GET" doc:name="Request" doc:id="bd630c29-374c-4b3f-a46c-bb1b22284fc2" config-ref="HTTP_Request_configuration_TravelOnTip" path="${http.requester.routePath}">
+		<http:request method="GET" doc:name="GET routes from External System" doc:id="bd630c29-374c-4b3f-a46c-bb1b22284fc2" config-ref="HTTP_Request_configuration_TravelOnTip" path="${http.requester.routePath}">
 			<http:headers ><![CDATA[#[output application/java
 ---
 {
 	"transactionId" : vars.transactionId
 }]]]></http:headers>
 		</http:request>
-		<ee:transform doc:name="Transform Message" doc:id="b7ca7983-5f2a-475d-a887-631d12e86922" >
+		<ee:transform doc:name="ExtJSONtoSAPI_JSON" doc:id="b7ca7983-5f2a-475d-a887-631d12e86922" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
 output application/json
